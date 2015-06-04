@@ -1,5 +1,5 @@
 angular.module('App', [])
-.controller('ScoreBoardController', ['$scope', '$http', function($scope, $http) {
+.controller('ScoreBoardController', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
   
   $scope.ours = ["sergeymishin", "dashamish", "dimitrikrechetov", "mishtra"]
   $scope.items = [];
@@ -16,5 +16,7 @@ angular.module('App', [])
   }
   
   $scope.load();
+  
+  $interval($scope.load, 2100000)
   
 }]);
