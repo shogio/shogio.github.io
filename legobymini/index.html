@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="App">
+<head>
+  <title>LegoByMini</title>
+  
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="main.js"></script>
+  
+  <style>
+   #main{
+     margin: 50px 0;
+   }
+   .ours{
+     
+   }
+   .ours td{
+/*     color: #3c763d;*/
+     color: #000;
+     font-weight: bolder;
+     background: #dff0d8;
+/*     border-color: #FFF !important;*/
+   }
+   
+   .table{
+     margin-top: 20px;
+   }
+  </style>
+</head>
+
+<body>
+  
+  <div id="main">
+    <div class="container" ng-controller="ScoreBoardController" align="center">
+      <div  ng-show="items.length > 0">
+        <a href="javascript:;" ng-click="load()" ng-disabled="loading" class="btn btn-primary">Refresh</a>
+        
+        <table class="table">
+          <tr ng-repeat="item in items" ng-class="{ours: (ours.indexOf(item.username) >= 0)}">
+            <td width="30">{{item.place}}</td>
+            <td>{{item.username}}</td>
+            <td align="right">
+              {{item.likes}}
+              <div class="small"></div>
+            </td>
+          </tr>
+        </table>
+      
+        <a href="javascript:;" ng-click="load()" ng-disabled="loading" class="btn btn-primary">Refresh</a>
+      </div>
+      <div ng-hide="items.length > 0" align="center">
+        Loading...
+      </div>
+      
+    </div>
+  </div>
+  
+  
+</body>
+</html>
