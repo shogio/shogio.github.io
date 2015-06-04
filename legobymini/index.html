@@ -12,7 +12,7 @@
   
   <style>
    #main{
-     margin: 50px 0;
+     margin: 10px 0;
    }
    .ours{
      
@@ -36,7 +36,7 @@
   <div id="main">
     <div class="container" ng-controller="ScoreBoardController" align="center">
       <div  ng-show="items.length > 0">
-        <a href="javascript:;" ng-click="load()" ng-disabled="loading" class="btn btn-primary">Refresh</a>
+        <div align="right"><a href="javascript:;" ng-click="load()" ng-disabled="loading" class="btn btn-primary">Refresh</a></div>
         
         <table class="table">
           <tr ng-repeat="item in items" ng-class="{ours: (ours.indexOf(item.username) >= 0)}">
@@ -49,7 +49,7 @@
           </tr>
         </table>
       
-        <a href="javascript:;" ng-click="load()" ng-disabled="loading" class="btn btn-primary">Refresh</a>
+        <div align="right"><a href="javascript:;" ng-click="load()" ng-disabled="loading" class="btn btn-primary">Refresh</a></div>
       </div>
       <div ng-hide="items.length > 0" align="center">
         Loading...
