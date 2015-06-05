@@ -5,6 +5,12 @@ angular.module('App', [])
   $scope.items = [];
   $scope.loading = false;
   
+  // https://graph.facebook.com/v2.2/?ids=http://specials.lookatme.ru/minibylego/media/24,http://specials.lookatme.ru/minibylego/media/22&fields=og_object{engagement}&access_token=530516770384019|OT-onwGmKNA_-uoBjBoZjQFj3rw
+  
+  $http.get('https://graph.facebook.com/v2.2/?ids=http://specials.lookatme.ru/minibylego/media/24,http://specials.lookatme.ru/minibylego/media/22&fields=og_object{engagement}&access_token=530516770384019|OT-onwGmKNA_-uoBjBoZjQFj3rw').success(function(data){
+    console.log(data)
+  });
+  
   $scope.load = function(){
     if($scope.loading)
       return;  
