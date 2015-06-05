@@ -2,6 +2,8 @@
 angular.module('App', [])
 .controller('ScoreBoardController', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
   
+  $scope.orderby = 'place'
+  
   $scope.ours = ["sergeymishin", "dashamish", "dimitrikrechetov", "mishtra"];
   $scope.items = [];
   $scope.loading = false;
@@ -125,12 +127,12 @@ angular.module('App', [])
     return ($scope.medias[url].likes.total - ($scope.medias[url].likes.vk + $scope.medias[url].likes.fb)) || 0
   }
   
-  $scope.countTotalRealtimeLikes = function(username){
+  $scope.countTotalRealtimeLikes = function(item){
     var value = 0
-    _.each(_.pluck($scope.user_medias[username], "url"), function(url){
+    _.each(_.pluck($scope.user_medias[item.username], "url"), function(url){
       value += $scope.getOffset(url) + ($scope.realtime_medias.fb[url] || 0) + ($scope.realtime_medias.vk[url]|| 0) - ($scope.realtime_medias.dogs[url] || 0)
     });
-    
+    item.totalRealtimeLikes = value;
     return value;
   }
   
@@ -144,7 +146,7 @@ angular.module('App', [])
   }
   
   $scope.realtimeLikesDifference = function(item){
-    return $scope.countTotalRealtimeLikes(item.username) - item.likes
+    return $scope.countTotalRealtimeLikes(item) - item.likes
   }
   
   $scope.load();

@@ -50,11 +50,24 @@
   <div id="main">
     <div class="container" ng-controller="ScoreBoardController" align="center">
       <div  ng-show="items.length > 0">
-        <div align="right"><a href="javascript:;" ng-click="load()" ng-disabled="loading" class="btn btn-primary">Refresh</a></div>
+        
+
+        <div class="pull-right" align="right">
+          <a href="javascript:;" ng-click="load()" ng-disabled="loading" class="btn btn-primary">Refresh</a>
+        </div>
+        
+        <div align="left">
+          Order:
+          <select ng-model="orderby" convert-to-number>
+            <option value="place">Current</option>
+            <option value="-totalRealtimeLikes">Realtime</option>
+          </select>
+        </div>
         
         <table class="table">
-          <tr ng-repeat="item in items" ng-class="{ours: (ours.indexOf(item.username) >= 0)}">
-            <td width="30">{{item.place}}</td>
+          <tr ng-repeat="item in items | orderBy:orderby" ng-class="{ours: (ours.indexOf(item.username) >= 0)}">
+            <td width="50">{{$index + 1}} <sup class="small gray" ng-show="item.place - ($index + 1) != 0">
+              <span ng-show="item.place - ($index + 1) > 0">+</span>{{item.place - ($index + 1)}}</sup></td>
             <td>{{item.username}}</td>
             
             <td>
@@ -65,6 +78,7 @@
               {{item.likes}}
             </td>
             <td width="60" align="right">
+              
               <span ng-show="realtimeLikesDifference(item) > 0">+</span>{{realtimeLikesDifference(item)}}
 <!-- 
               <div ng-repeat="media in user_medias[item.username]">
