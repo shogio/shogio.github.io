@@ -29,6 +29,18 @@
    .table{
      margin-top: 20px;
    }
+   
+   .small{
+     font-size: 0.8em;
+   }
+   .gray{
+     opacity: 0.6;
+   }
+   
+   .dog-icon{
+     width: 1em;
+   }
+   
   </style>
   
 </head>
@@ -46,12 +58,11 @@
             <td>{{item.username}}</td>
             
             <td>
-              <span ng-show="countTotalRealtimeDogs(item.username) > 0"><img src="cry_dog_2x.png" width="16" />&nbsp;{{countTotalRealtimeDogs(item.username)}}</span>
+              <nobr class="small gray" ng-show="countTotalRealtimeDogs(item.username) > 0"><img src="cry_dog_2x.png" class="dog-icon" />&nbsp;{{countTotalRealtimeDogs(item.username)}}</nobr>
             </td>
             
-            <td align="right">
+            <td align="right" class="small">
               {{item.likes}}
-              <div class="small"></div>
             </td>
             <td width="60" align="right">
               <span ng-show="realtimeLikesDifference(item) > 0">+</span>{{realtimeLikesDifference(item)}}
