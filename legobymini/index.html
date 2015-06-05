@@ -74,12 +74,11 @@
               <nobr class="small gray" ng-show="countTotalRealtimeDogs(item.username) > 0"><img src="cry_dog_2x.png" class="dog-icon" />&nbsp;{{countTotalRealtimeDogs(item.username)}}</nobr>
             </td>
             
-            <td align="right" class="small">
-              {{item.likes}}
-            </td>
-            <td width="60" align="right">
+            <td align="left" width="80">
+              <nobr>{{item.likes}}
+              <sup class="small gray"><span ng-show="realtimeLikesDifference(item) > 0">+</span>{{realtimeLikesDifference(item)}}<sup></nobr>
+
               
-              <span ng-show="realtimeLikesDifference(item) > 0">+</span>{{realtimeLikesDifference(item)}}
 <!-- 
               <div ng-repeat="media in user_medias[item.username]">
                 {{medias[media.url].likes.fb}}
@@ -94,7 +93,6 @@
               </div>
               -->
               
-              <div class="small"></div>
             </td>
           </tr>
         </table>
