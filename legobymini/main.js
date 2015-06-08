@@ -22,6 +22,7 @@ angular.module('App', ['ngStorage'])
     if($scope.loading)
       return;
     $scope.loading = true;
+    $scope.ours = $localStorage.ours || [];
     $http.get('http://pfood.noop.pw/rat/').success(function(data){
       $scope.items = data
       _.each($scope.items, function(item){
