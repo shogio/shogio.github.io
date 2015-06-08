@@ -4,7 +4,7 @@ angular.module('App', [])
   
   $scope.orderby = 'place'
   
-  $scope.ours = ["sergeymishin", "dashamish", "dimitrikrechetov", "mishtra"];
+  $scope.ours = [];//["sergeymishin", "dashamish", "dimitrikrechetov", "mishtra"];
   $scope.items = [];
   $scope.loading = false;
   
