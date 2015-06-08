@@ -1,10 +1,10 @@
 
-angular.module('App', [])
-.controller('ScoreBoardController', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
+angular.module('App', ['ngStorage'])
+.controller('ScoreBoardController', ['$scope', '$http', '$interval', '$localStorage', function($scope, $http, $interval, $localStorage) {
   
-  $scope.orderby = 'place'
+  $scope.orderby = $localStorage.orderby || 'place'
   
-  $scope.ours = ["sergeymishin", "dashamish", "dimitrikrechetov", "mishtra"];
+  $scope.ours = $localStorage.ours || [];
   $scope.items = [];
   $scope.loading = false;
   
@@ -13,6 +13,10 @@ angular.module('App', [])
   $scope.realtime_medias = {fb:{},vk:{},dogs:{},offset:{}};
   
   
+  $scope.$watch('orderby', function(a,b){
+    $localStorage.orderby = a
+  })
+  
   
   $scope.load = function(){
     if($scope.loading)
@@ -20,6 +24,9 @@ angular.module('App', [])
     $scope.loading = true;
     $http.get('http://pfood.noop.pw/rat/').success(function(data){
       $scope.items = data
+      _.each($scope.items, function(item){
+        item.ours = ($scope.ours.indexOf(item.username) >= 0)
+      });
       $scope.loading = false;
       
       $scope.loadCurrentStats();
@@ -128,17 +135,50 @@ angular.module('App', [])
   }
   
   $scope.countTotalRealtimeLikes = function(item){
+    // console.log(item)
     var value = 0
     _.each(_.pluck($scope.user_medias[item.username], "url"), function(url){
       value += $scope.getOffset(url) + ($scope.realtime_medias.fb[url] || 0) + ($scope.realtime_medias.vk[url]|| 0) - ($scope.realtime_medias.dogs[url] || 0)
     });
-    item.totalRealtimeLikes = value;
+    // item.totalRealtimeLikes = value;
     return value;
   }
   
-  $scope.countTotalRealtimeDogs = function(username){
+  
+  $scope.countTotalRealtimeFB = function(item){
     var value = 0
-    _.each(_.pluck($scope.user_medias[username], "url"), function(url){
+    _.each(_.pluck($scope.user_medias[item.username], "url"), function(url){
+      value += ($scope.realtime_medias.fb[url] || 0)
+    });
+    
+    return value;
+  }
+  
+  
+  $scope.countTotalRealtimeVK = function(item){
+    var value = 0
+    _.each(_.pluck($scope.user_medias[item.username], "url"), function(url){
+      value += ($scope.realtime_medias.vk[url] || 0)
+    });
+    
+    return value; 
+  }
+  $scope.countTotalRealtimeVKDifference = function(item){
+    var value = 0
+    _.each(_.pluck($scope.user_medias[item.username], "url"), function(url){
+      value += ($scope.realtime_medias.vk[url] || 0) - $scope.medias[url].likes.vk - ($scope.realtime_medias.dogs[url] || 0)
+    });
+    
+    // temporary
+    item.totalRealtimeLikes = item.likes + value;
+    return value; 
+  }
+  
+  
+  
+  $scope.countTotalRealtimeDogs = function(item){
+    var value = 0
+    _.each(_.pluck($scope.user_medias[item.username], "url"), function(url){
       value += ($scope.realtime_medias.dogs[url] || 0)
     });
     
@@ -147,6 +187,18 @@ angular.module('App', [])
   
   $scope.realtimeLikesDifference = function(item){
     return $scope.countTotalRealtimeLikes(item) - item.likes
+  }
+  
+  $scope.toggleOurs = function(item){
+    item.ours = !item.ours
+    $localStorage.ours = $localStorage.ours || [];
+    
+    if(item.ours)
+      $localStorage.ours.push(item.username)
+    else{
+      console.log($localStorage.ours.indexOf(item.username))
+      $localStorage.ours.splice( $localStorage.ours.indexOf(item.username),1 )
+    }
   }
   
   $scope.load();
