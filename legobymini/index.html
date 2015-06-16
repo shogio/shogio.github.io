@@ -105,8 +105,7 @@
             </td>
             
             <td align="left" width="10">
-              <nobr>{{item.likes}}
-                &nbsp;&nbsp;&nbsp;{{item.countTotalRealtimeLikes(item)}}
+              <nobr>{{item.likes + (orderby == '-totalRealtimeLikes' ? countTotalRealtimeVKDifference(item) : 0 )}}
               <!-- <sup class="small gray"><span ng-show="realtimeLikesDifference(item) > 0">+</span>{{realtimeLikesDifference(item)}}<sup> -->
               </nobr>
             </td>

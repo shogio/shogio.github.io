@@ -27,6 +27,7 @@ angular.module('App', ['ngStorage'])
       $scope.items = data
       _.each($scope.items, function(item){
         item.ours = ($scope.ours.indexOf(item.username) >= 0)
+        item.totalRealtimeLikes = item.likes
       });
       $scope.loading = false;
       
@@ -171,7 +172,7 @@ angular.module('App', ['ngStorage'])
     });
     
     // temporary
-    item.totalRealtimeLikes = item.likes + value;
+    item.totalRealtimeLikes = item.likes + (value || 0);
     return value; 
   }
   
