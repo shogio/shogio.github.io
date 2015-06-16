@@ -9,6 +9,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   
+  
+  <!--Поместите этот код в тег <head> вашей страницы-->
+  <script type="text/javascript" src="http://www.walletone.com/merchant/widget/1.0.0/script.js"></script>
+
   <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,900' rel='stylesheet' type='text/css'>
   
   <!--[if lte IE 7]>
@@ -115,6 +119,20 @@
       <!--<a href="mailto:up@shog.io">up@shog.io</a>-->
       
     </div>
+    
+
+    <!--Поместите этот код в то место разметки вашей страницы, где должен быть виджет W1-->
+    <div id="w1widget"></div>
+    <script type="text/javascript">
+    W1.widget({
+      "pt": "CreditCardRUB",
+      "bigLogo": true,
+      "grayscale": false,
+      "blackBg": false,
+      "fixWidth": "",
+      "container": "w1widget"
+    });
+    </script>
     
     
   </div></div>
