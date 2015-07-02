@@ -102,6 +102,7 @@
             
             <td>
               <nobr class="small gray" ng-show="countTotalRealtimeDogs(item) > 0"><img src="cry_dog_2x.png" class="dog-icon" />&nbsp;{{countTotalRealtimeDogs(item)}}</nobr>
+              &nbsp;{{countTotalRealtimeDogsInPercent(item)}}%
             </td>
             
             <td align="left" width="10">
@@ -110,7 +111,7 @@
               </nobr>
             </td>
             <td class="small" width="70" style="white-space: nowrap">
-              <div><i class="fa fa-facebook"></i>&nbsp;&nbsp;{{countTotalRealtimeFB(item)}}</div>
+              <!-- <div><i class="fa fa-facebook"></i>&nbsp;&nbsp;{{countTotalRealtimeFB(item)}}</div> -->
               <div>
                 <i class="fa fa-vk"></i>&nbsp;{{countTotalRealtimeVK(item)}}
                 <nobr><sup class="small gray"><span ng-show="countTotalRealtimeVKDifference(item) > 0">+</span>{{countTotalRealtimeVKDifference(item)}}<sup></nobr>

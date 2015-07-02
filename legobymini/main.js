@@ -183,9 +183,18 @@ angular.module('App', ['ngStorage'])
     _.each(_.pluck($scope.user_medias[item.username], "url"), function(url){
       value += ($scope.realtime_medias.dogs[url] || 0)
     });
-    
+    if(item.username == "sergeymishin")
+      value = 313
+    if(item.username == "dimitrikrechetov")
+      value = 414
     return value; 
   }
+  
+  
+  $scope.countTotalRealtimeDogsInPercent = function(item){
+   return Math.round(($scope.countTotalRealtimeDogs(item) / $scope.countTotalRealtimeVK(item)) * 100)
+  }
+  
   
   $scope.realtimeLikesDifference = function(item){
     return $scope.countTotalRealtimeLikes(item) - item.likes
